@@ -1,0 +1,28 @@
+---
+title: "parametric data generation"
+author: "Tristan De Winne"
+date: "3/27/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(SpiecEasi)
+```
+This rmarkdown file contains the parametric data simulation methods for a first prototype of the benchmark.
+
+## Negative binomial distribution
+
+```{r negative binomial}
+set.seed(1234)
+n <- 200000
+simData <-  rmvnegbin(n=n, mu=c(10,10), Sigma = diag(2), ks = c(1,1))[,1]
+
+simData <- simData[!is.nan(simData)]
+simData <- table(simData)
+
+barplot(simData)
+```
+
+
